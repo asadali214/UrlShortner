@@ -1,13 +1,11 @@
 package com.gr.url.core.service;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-
 import javax.ejb.Local;
 
 import com.gr.url.core.model.Click;
 import com.gr.url.core.model.Url;
+import com.gr.url.ws.model.ClickInfo;
 
 @Local
 public interface UrlServiceLocal {
@@ -34,9 +32,9 @@ public interface UrlServiceLocal {
 	
 	Boolean checkUrlExpiry(Url url);
 	
-	HashMap<Date, Integer> getDateStats(int UrlId);
+	ClickInfo getDateStats(int UrlId);
 	
-	HashMap<String, Integer> getBrowserStats(int UrlId);
+	ClickInfo getBrowserStats(int UrlId);
 	
-	HashMap<String, Integer> getPlatformStats(int UrlId);
+	ClickInfo getPlatformStats(int UrlId);
 }

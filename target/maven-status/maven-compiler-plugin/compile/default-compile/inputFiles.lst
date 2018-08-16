@@ -2,12 +2,13 @@ C:\Projects\gr\myUrl\src\main\java\com\gr\url\ws\exception\WsExceptionHandler.ja
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\core\dao\UrlDao.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\ws\exception\WsException.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\main\Main.java
-C:\Projects\gr\myUrl\src\main\java\com\gr\url\core\model\ClickStats.java
+C:\Projects\gr\myUrl\src\main\java\com\gr\url\ws\model\UrlStats.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\core\dao\UrlDaoHibernateImpl.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\core\service\UrlService.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\core\model\Url.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\ws\filter\WsCorsFilter.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\ws\util\WsRequestUtil.java
+C:\Projects\gr\myUrl\src\main\java\com\gr\url\ws\model\ClickInfo.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\common\Constants.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\ws\annotation\PATCH.java
 C:\Projects\gr\myUrl\src\main\java\com\gr\url\ws\v1\UrlResource.java

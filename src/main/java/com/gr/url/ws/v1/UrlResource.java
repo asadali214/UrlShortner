@@ -3,6 +3,7 @@ package com.gr.url.ws.v1;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -16,10 +17,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.gr.url.core.model.Click;
-import com.gr.url.core.model.ClickStats;
 import com.gr.url.core.model.Url;
 import com.gr.url.core.service.UrlService;
 import com.gr.url.core.service.UrlServiceLocal;
+import com.gr.url.ws.model.ClickInfo;
+import com.gr.url.ws.model.UrlStats;
 
 import eu.bitwalker.useragentutils.UserAgent;
 
@@ -93,11 +95,15 @@ public class UrlResource {
 
 	@GET
 	@Path("/function/getClickFullStats/{urlId}")
-	public ClickStats getClickFullStats(@PathParam("urlId") int urlId) {
-		ClickStats fullStats = new ClickStats();
-		fullStats.setDateStats(service.getDateStats(urlId));
-		fullStats.setBrowserStats(service.getBrowserStats(urlId));
-		fullStats.setPlatformStats(service.getPlatformStats(urlId));
+	public UrlStats getClickFullStats(@PathParam("urlId") int urlId) {
+		HashMap<String, ClickInfo> urlInfo=new HashMap<>();
+		
+		urlInfo.put("DateStats",service.getDateStats(urlId));
+		urlInfo.put("BrowserStats",service.getBrowserStats(urlId));
+		urlInfo.put("PlatformStats",service.getPlatformStats(urlId));
+		
+		UrlStats fullStats = new UrlStats();
+		fullStats.setUrlInfo(urlInfo);
 		return fullStats;
 	}
 

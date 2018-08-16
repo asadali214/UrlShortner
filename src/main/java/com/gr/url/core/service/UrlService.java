@@ -3,7 +3,6 @@ package com.gr.url.core.service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -12,6 +11,7 @@ import com.gr.common.service.ServiceManager;
 import com.gr.url.core.dao.UrlDaoHibernateImpl;
 import com.gr.url.core.model.Click;
 import com.gr.url.core.model.Url;
+import com.gr.url.ws.model.ClickInfo;
 
 @Stateless
 public class UrlService implements UrlServiceLocal {
@@ -109,17 +109,17 @@ public class UrlService implements UrlServiceLocal {
 	}
 
 	@Override
-	public HashMap<Date, Integer> getDateStats(int UrlId) {
+	public ClickInfo getDateStats(int UrlId) {
 		return UrlDaoHibernateImpl.getDao().getDateStats(UrlId);
 	}
 
 	@Override
-	public HashMap<String, Integer> getBrowserStats(int UrlId) {
+	public ClickInfo getBrowserStats(int UrlId) {
 		return UrlDaoHibernateImpl.getDao().getBrowserStats(UrlId);
 	}
 
 	@Override
-	public HashMap<String, Integer> getPlatformStats(int UrlId) {
+	public ClickInfo getPlatformStats(int UrlId) {
 		return UrlDaoHibernateImpl.getDao().getPlatformStats(UrlId);
 	}
 

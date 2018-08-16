@@ -9,47 +9,6 @@
 	<name>url</name>
 	<url>http://maven.apache.org</url>
 
-	<!-- <distributionManagement> -->
-	<!-- <repository> -->
-	<!-- <id>gr-internal</id> -->
-	<!-- <url>http://grisapp/mvnrepo/repository/gr-internal/</url> -->
-	<!-- <releases> -->
-	<!-- <enabled>true</enabled> -->
-	<!-- </releases> -->
-	<!-- <snapshots> -->
-	<!-- <enabled>true</enabled> -->
-	<!-- </snapshots> -->
-	<!-- </repository> -->
-	<!-- </distributionManagement> -->
-
-	<!-- <repositories> -->
-	<!-- <repository> -->
-	<!-- <id>gr-3rdparty</id> -->
-	<!-- <name>Third party jars</name> -->
-	<!-- <url>http://grisapp/mvnrepo/repository/gr-3rdparty/</url> -->
-	<!-- <releases> -->
-	<!-- <enabled>true</enabled> -->
-	<!-- </releases> -->
-	<!-- <snapshots> -->
-	<!-- <enabled>true</enabled> -->
-	<!-- </snapshots> -->
-	<!-- </repository> -->
-
-	<!-- <repository> -->
-	<!-- <id>central</id> -->
-	<!-- <name>Central Repository</name> -->
-	<!-- <url>http://repo.maven.apache.org/maven2</url> -->
-	<!-- <layout>default</layout> -->
-	<!-- <releases> -->
-	<!-- <enabled>true</enabled> -->
-	<!-- </releases> -->
-	<!-- <snapshots> -->
-	<!-- <enabled>true</enabled> -->
-	<!-- </snapshots> -->
-	<!-- </repository> -->
-
-	<!-- </repositories> -->
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.org.jboss.as.plugins.maven.plugin>7.1.Final</version.org.jboss.as.plugins.maven.plugin>
@@ -336,14 +295,7 @@
 					<warSourceExcludes>**/dom4j-1.6.1.jar</warSourceExcludes>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
-				<!-- <executions> -->
-				<!-- <execution> -->
-				<!-- <phase>prepare-package</phase> -->
-				<!-- <goals> -->
-				<!-- <goal>exploded</goal> -->
-				<!-- </goals> -->
-				<!-- </execution> -->
-				<!-- </executions> -->
+				
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -1,7 +1,8 @@
 package com.gr.url.core.dao;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -15,6 +16,7 @@ import com.gr.common.dao.DaoException;
 import com.gr.common.dao.DaoManager;
 import com.gr.url.core.model.Click;
 import com.gr.url.core.model.Url;
+import com.gr.url.ws.model.ClickInfo;
 
 public class UrlDaoHibernateImpl extends AbstractHibernateDao<Url, Integer> implements UrlDao {
 
@@ -180,9 +182,9 @@ public class UrlDaoHibernateImpl extends AbstractHibernateDao<Url, Integer> impl
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public HashMap<Date, Integer> getDateStats(int UrlId) {
+	public ClickInfo getDateStats(int UrlId) {
 		Session session = null;
-		HashMap<Date, Integer> hmap = new HashMap<>();
+		ClickInfo clickInfo = null;
 		try {
 			session = getSession();
 			session.beginTransaction();
@@ -193,31 +195,39 @@ public class UrlDaoHibernateImpl extends AbstractHibernateDao<Url, Integer> impl
 			criteria.setProjection(Projections.distinct(projList));
 
 			List<Date> dates = criteria.list();
+			List<String> labels = new ArrayList<>();
+			List<Integer> data = new ArrayList<>();
 			for (Date date : dates) {
-//				Calendar cal = Calendar.getInstance();
-//				cal.setTime(date);
-//				cal.get(Calendar.YEAR);
-
 				criteria = session.createCriteria(Click.class).add(Restrictions.eq("urlId", UrlId))
 						.add(Restrictions.eq("dateClicked", date)).setProjection(Projections.rowCount());
 
-				hmap.put(date, (int) (long) criteria.uniqueResult());
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(date);
+				String year = "" + cal.get(Calendar.YEAR);
+				int count = (int) (long) criteria.uniqueResult();
+				if (labels.contains(year)) {
+					int i = labels.indexOf(year);
+					data.set(i, (data.get(i) + count));
+				} else {
+					labels.add(year);
+					data.add(count);
+				}
 			}
-
+			clickInfo = new ClickInfo(labels, data);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			throw new DaoException(e);
 		} finally {
 			closeSession(session);
 		}
-		return hmap;
+		return clickInfo;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public HashMap<String, Integer> getBrowserStats(int UrlId) {
+	public ClickInfo getBrowserStats(int UrlId) {
 		Session session = null;
-		HashMap<String, Integer> hmap = new HashMap<>();
+		ClickInfo clickInfo = null;
 		try {
 			session = getSession();
 			session.beginTransaction();
@@ -228,26 +238,27 @@ public class UrlDaoHibernateImpl extends AbstractHibernateDao<Url, Integer> impl
 			criteria.setProjection(Projections.distinct(projList));
 
 			List<String> browsers = criteria.list();
+			List<Integer> data = new ArrayList<>();
 			for (String browser : browsers) {
 				criteria = session.createCriteria(Click.class).add(Restrictions.eq("urlId", UrlId))
 						.add(Restrictions.eq("browserClicked", browser)).setProjection(Projections.rowCount());
-				hmap.put(browser, (int) (long) criteria.uniqueResult());
+				data.add((int) (long) criteria.uniqueResult());
 			}
-
+			clickInfo = new ClickInfo(browsers, data);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			throw new DaoException(e);
 		} finally {
 			closeSession(session);
 		}
-		return hmap;
+		return clickInfo;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public HashMap<String, Integer> getPlatformStats(int UrlId) {
+	public ClickInfo getPlatformStats(int UrlId) {
 		Session session = null;
-		HashMap<String, Integer> hmap = new HashMap<>();
+		ClickInfo clickInfo = null;
 		try {
 			session = getSession();
 			session.beginTransaction();
@@ -258,18 +269,19 @@ public class UrlDaoHibernateImpl extends AbstractHibernateDao<Url, Integer> impl
 			criteria.setProjection(Projections.distinct(projList));
 
 			List<String> platforms = criteria.list();
+			List<Integer> data = new ArrayList<>();
 			for (String platform : platforms) {
 				criteria = session.createCriteria(Click.class).add(Restrictions.eq("urlId", UrlId))
 						.add(Restrictions.eq("platformClicked", platform)).setProjection(Projections.rowCount());
-				hmap.put(platform, (int) (long) criteria.uniqueResult());
+				data.add((int) (long) criteria.uniqueResult());
 			}
-
+			clickInfo = new ClickInfo(platforms, data);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			throw new DaoException(e);
 		} finally {
 			closeSession(session);
 		}
-		return hmap;
+		return clickInfo;
 	}
 }
