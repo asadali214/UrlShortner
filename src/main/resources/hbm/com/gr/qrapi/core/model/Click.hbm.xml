@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.gr.url.core.model.Click" table="Click">
+        <id name="id" type="int">
+            <column name="Id" />
+            <generator class="native" />
+        </id>
+        <property name="dateClicked" type="java.util.Date">
+            <column name="DateClicked" />
+        </property>
+        <property name="browserClicked" type="java.lang.String">
+            <column name="BrowserClicked" />
+        </property>
+        <property name="platformClicked" type="java.lang.String">
+            <column name="PlatformClicked" />
+        </property>
+        <property name="urlId" type="int">
+            <column name="UrlId" />
+        </property>
+    </class>
+</hibernate-mapping>
