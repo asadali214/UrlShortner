@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class ClickStats {
+	
+	
 	HashMap<Date, Integer> dateStats = new HashMap<Date, Integer>();
 	HashMap<String, Integer> browserStats = new HashMap<String, Integer>();
 	HashMap<String, Integer> platformStats = new HashMap<String, Integer>();

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Built-By: aali
+Build-Jdk: 1.8.0_181
+Created-By: Maven Integration for Eclipse
+Dependencies: org.hibernate, org.hibernate.validator,
+								org.java
+ ssist
+
