@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.gr.url.core.model.Click;
 import com.gr.url.core.model.Url;
@@ -62,10 +63,12 @@ public class UrlResource {
 				URI uriLong = null;
 				try {
 					uriLong = new URI("link to the expired error page here..");
+					response = Response.seeOther(uriLong).build();
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
+					response = Response.status(Status.BAD_REQUEST).entity("This ShortUrl is expired").build();
 				}
-				response = Response.seeOther(uriLong).build();
+				
 
 			}
 		}
