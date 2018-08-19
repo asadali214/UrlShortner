@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Url implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -58,6 +60,7 @@ public class Url implements Serializable {
 		this.shortUrl = shortUrl;
 	}
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy",timezone="CET")
 	public Date getDateCreated() {
 		return dateCreated;
 	}

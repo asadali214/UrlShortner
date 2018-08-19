@@ -63,22 +63,23 @@ public class UrlDaoHibernateImpl extends AbstractHibernateDao<Url, Integer> impl
 	}
 
 	@Override
-	public int addNewUrl(Url url) {
+	public String addNewUrl(Url url) {
 		Session session = null;
-		int urlId = -1;
+		String shortUrl="";
 		try {
 			session = getSession();
 
 			session.beginTransaction();
-			urlId = (Integer) session.save(url);
-
+			int id = (Integer) session.save(url);
+			shortUrl=(String) session.createCriteria(Url.class).add(Restrictions.eq("id", id))
+					.setProjection(Projections.property("shortUrl")).uniqueResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			throw new DaoException(e);
 		} finally {
 			closeSession(session);
 		}
-		return urlId;
+		return shortUrl;
 	}
 
 	@Override

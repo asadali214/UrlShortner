@@ -4,6 +4,8 @@ package com.gr.url.core.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Click implements Serializable {
 
 	
@@ -43,7 +45,7 @@ public class Click implements Serializable {
 		this.id = id;
 	}
 
-
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy",timezone="CET")
 	public Date getDateClicked() {
 		return dateClicked;
 	}

@@ -16,7 +16,7 @@ public interface UrlServiceLocal {
 	
 	Url checkLongUrl(String longUrl);
 
-	int addNewUrl(Url url);
+	String addNewUrl(Url url);
 
 	Url updateUrl(int UrlId, Url urlNew);
 

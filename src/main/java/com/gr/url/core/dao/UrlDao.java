@@ -11,7 +11,7 @@ public interface UrlDao extends GenericDao<Url, Integer> {
 
 	public List<Url> getAllUrls();
 
-	public int addNewUrl(Url url);
+	public String addNewUrl(Url url);
 
 	public Url updateUrl(int UrlId, Url urlNew);
 

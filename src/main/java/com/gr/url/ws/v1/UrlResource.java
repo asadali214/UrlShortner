@@ -62,13 +62,12 @@ public class UrlResource {
 			} else {
 				URI uriLong = null;
 				try {
-					uriLong = new URI("link to the expired error page here..");
+					uriLong = new URI("http://localhost:4200/expired");
 					response = Response.seeOther(uriLong).build();
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
 					response = Response.status(Status.BAD_REQUEST).entity("This ShortUrl is expired").build();
 				}
-				
 
 			}
 		}
@@ -84,27 +83,29 @@ public class UrlResource {
 
 	@POST
 	@Path("/function/add")
-	public int addNewUrl(Url url) {
-		if (service.checkLongUrl(url.getLongUrl()) == null) {// if the long url is not already registered..
+	public Url addNewUrl(Url url) {
+		Url oldUrl = service.checkLongUrl(url.getLongUrl());
+		if (oldUrl == null) {// if the long url is not already registered..
 			// generate shortUrl by taking the last row id of the database..
 			String shortUrl = service.generateShortUrl();
-			url.setShortUrl(shortUrl);
+			url.setShortUrl("http://localhost:8080/url/" + shortUrl);
 			Date currentDate = new Date();
 			url.setDateCreated(currentDate);
-			return service.addNewUrl(url);
+			service.addNewUrl(url);
+			return url;
 		}
-		return -1;
+		return oldUrl;
 	}
 
 	@GET
 	@Path("/function/getClickFullStats/{urlId}")
 	public UrlStats getClickFullStats(@PathParam("urlId") int urlId) {
-		HashMap<String, ClickInfo> urlInfo=new HashMap<>();
-		
-		urlInfo.put("DateStats",service.getDateStats(urlId));
-		urlInfo.put("BrowserStats",service.getBrowserStats(urlId));
-		urlInfo.put("PlatformStats",service.getPlatformStats(urlId));
-		
+		HashMap<String, ClickInfo> urlInfo = new HashMap<>();
+
+		urlInfo.put("DateStats", service.getDateStats(urlId));
+		urlInfo.put("BrowserStats", service.getBrowserStats(urlId));
+		urlInfo.put("PlatformStats", service.getPlatformStats(urlId));
+
 		UrlStats fullStats = new UrlStats();
 		fullStats.setUrlInfo(urlInfo);
 		return fullStats;

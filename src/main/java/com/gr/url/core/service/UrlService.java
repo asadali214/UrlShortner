@@ -26,7 +26,7 @@ public class UrlService implements UrlServiceLocal {
 	}
 
 	@Override
-	public int addNewUrl(Url url) {
+	public String addNewUrl(Url url) {
 		return UrlDaoHibernateImpl.getDao().addNewUrl(url);
 	}
 
@@ -60,7 +60,7 @@ public class UrlService implements UrlServiceLocal {
 	public Url getLongUrl(String shortUrl) {
 		ArrayList<Url> urls = (ArrayList<Url>) getAllUrls();
 		for (Url url : urls) {
-			if (url.getShortUrl().equals(shortUrl)) {
+			if (url.getShortUrl().equals("http://localhost:8080/url/"+shortUrl)) {
 				return url;
 			}
 		}
