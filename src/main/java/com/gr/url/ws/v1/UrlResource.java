@@ -71,6 +71,16 @@ public class UrlResource {
 
 			}
 		}
+		else {
+			URI uriLong = null;
+			try {
+				uriLong = new URI("http://localhost:4200/notexist");
+				response = Response.seeOther(uriLong).build();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+				response = Response.status(Status.BAD_REQUEST).entity("Page Not found!").build();
+			}
+		}
 		return response;
 
 	}
