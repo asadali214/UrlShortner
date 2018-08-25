@@ -32,7 +32,6 @@ public class UrlDaoHibernateImpl extends AbstractHibernateDao<Url, Integer> impl
 			session = getSession();
 			Criteria criteria = session.createCriteria(Url.class);
 			criteria.setMaxResults(100);
-
 			List<Url> urls = criteria.list();
 			return urls;
 		} catch (Exception aex) {

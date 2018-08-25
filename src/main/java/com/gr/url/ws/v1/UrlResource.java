@@ -37,6 +37,7 @@ public class UrlResource {
 	@Path("/{shortUrl}")
 	public Response redirectToLongUrl(@PathParam("shortUrl") String shortUrl,
 			@HeaderParam("user-agent") String userAgentString) {
+		System.out.println("\nRedirecting to long url ###");
 		Response response = null;
 		Url url = service.getLongUrl(shortUrl);
 		if (url != null) {
@@ -78,12 +79,14 @@ public class UrlResource {
 	@GET
 	@Path("/function/get")
 	public List<Url> getAllUrls() {
+		System.out.println("\nGetting all urls ###");
 		return service.getAllUrls();
 	}
 
 	@POST
 	@Path("/function/add")
 	public Url addNewUrl(Url url) {
+		System.out.println("\nAdding a new url ###");
 		Url oldUrl = service.checkLongUrl(url.getLongUrl());
 		if (oldUrl == null) {// if the long url is not already registered..
 			// generate shortUrl by taking the last row id of the database..
@@ -100,6 +103,7 @@ public class UrlResource {
 	@GET
 	@Path("/function/getClickFullStats/{urlId}")
 	public UrlStats getClickFullStats(@PathParam("urlId") int urlId) {
+		System.out.println("\nGetting clicks information ###");
 		HashMap<String, ClickInfo> urlInfo = new HashMap<>();
 
 		urlInfo.put("DateStats", service.getDateStats(urlId));
