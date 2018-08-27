@@ -56,8 +56,8 @@ public class UrlResource {
 				Date currentDate = new Date();
 				int urlId = url.getId();
 				Click click = new Click(currentDate, browser, platform, urlId);
-
 				service.addClickOnUrl(click);
+				//refresh front end here.. 
 
 			} else {
 				URI uriLong = null;
